@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Alkalami&family=Poppins:wght@300;400;700&display=swap');
+
+/**/
+:root{
+
+    --line-border-fill: #ff4d6d;
+    --line-border-empty: #dee2e6;
+}
+*{
+    box-sizing:border-box;
+}
+body{
+    font-family: "inter",sans-serif;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center; 
+    justify-content: center;/*sayfanın üsten ortasına alır*/
+height: 100vh; /*sayfanın tam ortasına alır*/
+margin: 0px;
+overflow: hidden; /*scrolu gizledik*/
+
+}
+
+
+/*ilk divin içine container açtık containeri ortalayınca hepsi ortalandı tır konteynırı gibi düşün
+ parsiyel yükleme gibi hepsi kazakistana gider*/
+.container{
+     text-align: center; 
+
+}
+
+.progress-container{
+display: flex; /*sayılar yanyana geldi*/
+justify-content: space-between;/*rakamlar eşit boşluklar şeklinde bölündü*/
+/*justify-content: center;
+sayılar yanyana ortalandı*/
+position: relative;
+margin-bottom: 30px;/*sayılar 30 px yukarı kaltı*/
+width: 350px;
+max-width: 100%;
+}
+
+/*altta bulunacak line (çizgi) için .progress-container::before yapıyoruz*/
+.progress-container::before{
+    content:"";
+    background-color: var(--line-border-empty);
+    height: 4px;
+    width: 100%;
+/*
+content:"";
+    background-color: var(--line-border-empty);
+    height: 4px;
+    width: 100%;
+    
+    bu kısmı yazınca sayıların önünde düz bir çizgi çıktı 
+    ama en başta yazdığımız content:""; i silersek yok oluyor*/
+    position: absolute;/*sayı ortaya geldi çizgi sayının üstüne çıktı*/
+    top: 50%;/*çizgi sayının üstüne geldi*/
+    left:0;
+    transform: translateY(-50%);/*çizgi tam sayının ortadan üstüne geldi */
+    z-index: -1; /*sayı çizginin üstüne geldi çizgi arka planda kaldı*/
+    transition: 0.4s ease; /*yavaş hızlı yavaş animasyonuyla hareketedecek*/
+}
+.progress{
+    background-color: var(--line-border-fill);
+    height: 4px;
+    
+    width: 0%; 
+    
+    
+    /* width: 50%;  */
+    
+    /*dolu olunca var(--line-border-fill) bu kısım yazdığımız için kırmızı oluyor
+    şimdilik 50% veriyoruz anlamamız için daha sonra 0 yaptık*/
+    position: absolute;/*sayı kırmızı çizginin altında ortalanıyor*/
+    top: 50%;/*kızmızı çizgi sayının altına geliyor */
+    left: 0;/*kızmızı çizgi sayının altında sola geliyor */
+    transform: translateY(-50%);/*çizgi tam sayının ortadan üstüne geldi */
+    z-index: -1;
+    transition: 0.4s ease;
+}
+
+.circle{
+    background-color: white; 
+    /* background-color: purple;  */
+    
+    /*sayıların arkasında pembe yuvarlak oluyor
+    -- üstte yorum yaptığımız ne yaptığımız belli olsun diye pembeydi dahasonra beyaz yaptık*/
+
+
+    border-radius: 50%;
+    height: 30px; /*çizgi sayının altına geldi */
+    width: 30px;
+    display: flex;
+    align-items: center; /*sayı pembe çemberin içine girdi sola doğru*/
+    justify-content: center; /*sayı pembe çemberin içinde ortalandı*/
+    border: 3px solid var(--line-border-empty);/*pembe çemberin etrafında boş bir çizgi oldu */
+   transition: 0.4s ease;
+}
+.circle.active{
+    border-color: var(--line-border-fill);/*ilk çember 1 numaralı olanın  dışı kırmızı oldu*/
+
+}
+.btn{
+background-color: var(--line-border-fill);/*butonların arkası kırmızı oldu*/
+color: #fff; /*yazıları beyaz oldu*/
+border:0; /*border kaldırıldı(daha önce btn üzerinde siyah çizgi vardı)*/
+border-radius: 8px; /*köşeler yuvarlak oldu*/
+cursor: pointer;/*imleç btn üzerine gelince el işareti oldu*/
+font-family: inherit;/*kalıtımsal aynı font-size kullandı*/
+padding: 8px 24px; /*btn lar büyüdü*/
+font-size: 14px; /*yazılar büyüdü*/
+margin: 5px; /* btn lar uzaklaştı */
+}
+
+.btn:active{ /*butonlar aktif olunca*/
+   transform: scale (0.90); /*butonlar aktif olunca ölceklerini değiştirsin*/
+}
+
+.btn:focus{
+    outline: 0;
+}
+.btn:disabled{
+    background-color: var(--line-border-empty);/*önceki yazan btn pasif oldu*/
+}
